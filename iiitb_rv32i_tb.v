@@ -1,11 +1,11 @@
-module verilog1;
+module iiitb_rv32i_tb;
 
 reg clk;
 integer k;
 
 wire [31:0]WB_OUT,PC;
 
-rv32i rv32(clk,WB_OUT,PC);
+iiitb_rv32i rv32(clk,WB_OUT,PC);
 
 initial clk=1'b1;
 
@@ -13,8 +13,8 @@ always #10 clk=!clk;
 
 initial begin 
 
-$dumpfile ("riscv_out.vcd"); //by default vcd
-$dumpvars (0, verilog1);
+  $dumpfile ("iiitb_rv32i.vcd"); //by default vcd
+  $dumpvars (0, iiitb_rv32i_tb);
 
 for(k=0;k<32;k=k+1) 
 rv32.REG[k] <=k;
