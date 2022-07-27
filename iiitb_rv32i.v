@@ -1,4 +1,4 @@
-module rv32i(clk,WB_OUT,PC);
+module iiitb_rv32i(clk,WB_OUT,PC);
 input clk;
 reg[31:0] IF_ID_IR,IF_ID,IF_ID_NPC;//instruction fetch stage
 
