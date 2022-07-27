@@ -10,7 +10,7 @@ This project provides an insight into the working of a few important instruction
 ![image](https://user-images.githubusercontent.com/110079631/181293948-beb8622c-7696-4b06-b6c9-eeab9b8ab9d3.png)
 
 ### INSTRUCTION SET OF RISC-V RV32I
-![image](https://user-images.githubusercontent.com/110079631/181294198-36d95826-a71a-4957-825a-860c814199c1.png)
+![image](https://user-images.githubusercontent.com/110079631/181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c.png)
 
 ### FUNCTIONAL SIMULATION:
 **To clone the repository and download the netlist files for simulation , enter the following commands in your terminal.**
