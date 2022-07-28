@@ -39,7 +39,7 @@ $ ./iiitb_rv32i
 ![RISC-V waveform](https://user-images.githubusercontent.com/110079631/181292645-93965b12-4b8a-4d89-8af9-6ea72132c498.jpg)
 
 ### Author
-**Vinay Rayapati**
+ - **Vinay Rayapati**
 
 ### Contributors
  - Vinay Rayapati
