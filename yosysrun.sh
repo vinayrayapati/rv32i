@@ -11,4 +11,4 @@ abc -liberty /home/vinay.r/Desktop/iiitb_rv32i/lib/sky130_fd_sc_hd__tt_025C_1v80
 clean
 flatten
 # write synthesized design
-write_verilog -assert iiitb_rv32i_synth.v
+write_verilog -noattr iiitb_rv32i_synth.v
