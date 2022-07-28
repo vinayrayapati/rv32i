@@ -38,3 +38,19 @@ $ ./iiitb_rv32i
 ### The output waveform in the gtkwave
 ![RISC-V waveform](https://user-images.githubusercontent.com/110079631/181292645-93965b12-4b8a-4d89-8af9-6ea72132c498.jpg)
 
+### Author
+**Vinay Rayapati**
+
+### Contributors
+ - Vinay Rayapati
+ - Kunal Ghosh
+
+### Acknowledgments
+ - Kunal Ghosh, Director, VSD Corp. Pvt. Ltd.
+ - Dr.Murali, Co-ordinator(M.Tech), IIIT Bangalore.
+
+### Contact Information
+ - Vinay Rayapati,Post-Graduate student,International Institute of Information Technology Bangalore,vinayrayapati@outlook.com
+ - Kunal Ghosh, Director, VSD Corp. Pvt. Ltd. kunalghosh@gmail.com
+ - Dr.Murali, Co-ordinator(M.Tech), IIIT Bangalore,coordinator-mtech@iiitb.ac.in
+
