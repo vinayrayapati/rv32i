@@ -13,6 +13,13 @@ This project provides an insight into the working of a few important instruction
 ![image](https://user-images.githubusercontent.com/110079631/181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c.png)
 
 ### FUNCTIONAL SIMULATION:
+
+**ABOUT VERILOG**
+Icarus Verilog is an implementation of the Verilog hardware description language.
+
+**ABOUT GTKWAVE**
+GTKWave is a fully featured GTK+ v1. 2 based wave viewer for Unix and Win32 which reads Ver Structural Verilog Compiler generated AET files as well as standard Verilog VCD/EVCD files and allows their viewing.
+
 **To clone the repository and download the netlist files for simulation , enter the following commands in your terminal.**
 
 ```
@@ -24,7 +31,6 @@ $ cd iiitb_rv32i
 $ iverilog -o iiitb_rv32i iiitb_rv32i.v iiitb_rv32i_tb.v
 $ ./iiitb_rv32i
 ```
-
 **To see the output waveform in gtkwave, enter the following commands in your terminal.**
 
 `$ gtkwave iiitb_rv32i.vcd`
