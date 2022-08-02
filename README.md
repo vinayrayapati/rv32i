@@ -44,6 +44,10 @@ $ ./iiitb_rv32i
 `$ gtkwave iiitb_rv32i.vcd`
 
 ### The output waveform in the gtkwave
+
+![image](https://user-images.githubusercontent.com/110079631/182328768-d66c30a9-2d49-46f7-b444-9fd37817726c.png)
+
+
 ![RISC-V waveform](https://user-images.githubusercontent.com/110079631/181292645-93965b12-4b8a-4d89-8af9-6ea72132c498.jpg)
 
 ### Author
