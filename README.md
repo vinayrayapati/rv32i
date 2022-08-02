@@ -68,8 +68,9 @@ $ ./iiitb_rv32i
  ![load](https://user-images.githubusercontent.com/110079631/182337721-d0409db2-7b69-475d-b24f-45069a92c149.png)
 
  Instruction 6:branch(i6)
- After branching performing
- INstruction 7:add r12 r13,r14
+ 
+ After branching, performing
+ Instruction 7:add r12 r13,r14
  
 ![branch and add](https://user-images.githubusercontent.com/110079631/182337772-3e40e706-8383-43a7-b9f9-28d6fbe5e942.png)
 
