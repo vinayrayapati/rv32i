@@ -49,24 +49,29 @@ $ ./iiitb_rv32i
  
  Instruction 1:add r4,r2,r1
  
- /home/vinay/Pictures/add.png
+ ![add](https://user-images.githubusercontent.com/110079631/182337436-a9eea0f0-267a-4ad8-a7dc-dfd4ce6e4060.png)
 
  Instruction 2:SUB R5,R2,R3
  
+![sub](https://user-images.githubusercontent.com/110079631/182337538-7a2c98dc-96cb-4140-9044-689d7e39f551.png)
 
  Instruction 3:ADI R6,R7,IMM
  
+![adi](https://user-images.githubusercontent.com/110079631/182337630-da3559f1-8204-4187-a8d5-ce6879f0f218.png)
 
  Instruction 4:st r8 r9 imm=1
  
+![store](https://user-images.githubusercontent.com/110079631/182337661-2910cdd7-4817-40c3-8d2d-ecc4fb431c4c.png)
 
  Instruction 5:lt r10 r8 imm=1
  
+ ![load](https://user-images.githubusercontent.com/110079631/182337721-d0409db2-7b69-475d-b24f-45069a92c149.png)
 
  Instruction 6:branch(i6)
  After branching performing
  INstruction 7:add r12 r13,r14
  
+![branch and add](https://user-images.githubusercontent.com/110079631/182337772-3e40e706-8383-43a7-b9f9-28d6fbe5e942.png)
 
 ### Author
  - **Vinay Rayapati**
