@@ -85,6 +85,9 @@ $ ./iiitb_rv32i
  - Kunal Ghosh, Director, VSD Corp. Pvt. Ltd.
  - Dr.Murali, Co-ordinator(M.Tech), IIIT Bangalore.
 
+### References
+ - Jim Ledin “Modern Computer Architecture and Organisation" (2022)
+
 ### Contact Information
  - Vinay Rayapati,Post-Graduate student,International Institute of Information Technology Bangalore,vinayrayapati@outlook.com
  - Kunal Ghosh, Director, VSD Corp. Pvt. Ltd. kunalghosh@gmail.com
