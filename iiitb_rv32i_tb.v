@@ -12,7 +12,7 @@ always #10 clk=!clk;
 
 initial begin 
 
-$dumpfile ("rv32i.vcd"); //by default vcd
+  $dumpfile ("iiitb_rv32i.vcd"); //by default vcd
 $dumpvars (0, iiitb_rv32i_tb);
 
 for(k=0;k<32;k=k+1) 
