@@ -105,7 +105,7 @@ $ ./iiitb_rv32i
  
  <img width="1291" alt="srl r16 r14 r2(2)" src="https://user-images.githubusercontent.com/110079631/183015708-1a8708a7-3dc8-43fc-91c8-8ed09ff31a2a.png">
 
- Full instruction pipeline and pc-increment description Waveform
+ Full 5-stage instruction pipeline and pc-increment description Waveform
  
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
