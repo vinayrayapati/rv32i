@@ -47,32 +47,54 @@ $ ./iiitb_rv32i
 
  The output waveform showing the instructions performed in a 5-stage pipelined architecture.
  
- Instruction 1:add r4,r2,r1
+ Instruction 1:add r6,r2,r1
  
- ![add](https://user-images.githubusercontent.com/110079631/182337436-a9eea0f0-267a-4ad8-a7dc-dfd4ce6e4060.png)
-
- Instruction 2:SUB R5,R2,R3
  
-![sub](https://user-images.githubusercontent.com/110079631/182337538-7a2c98dc-96cb-4140-9044-689d7e39f551.png)
-
- Instruction 3:ADI R6,R7,IMM
+ Instruction 2:sub r7,r1,r2
  
-![adi](https://user-images.githubusercontent.com/110079631/182337630-da3559f1-8204-4187-a8d5-ce6879f0f218.png)
 
- Instruction 4:st r8 r9 imm=1
+ Instruction 3:and r8,r1,r3
  
-![store](https://user-images.githubusercontent.com/110079631/182337661-2910cdd7-4817-40c3-8d2d-ecc4fb431c4c.png)
 
- Instruction 5:lt r10 r8 imm=1
+ Instruction 4:or r9,r2,r5
  
- ![load](https://user-images.githubusercontent.com/110079631/182337721-d0409db2-7b69-475d-b24f-45069a92c149.png)
 
- Instruction 6:branch(i6)
+ Instruction 5:xor r10,r1,r4
+ 
+ 
+ Instruction 6:slt r11,r2,r4
+ 
+ 
+ Instruction 7:addi r12,r4,5
+ 
+ 
+ Instruction 8:sw r3,r1,2
+ 
+ 
+ Instruction 9:lw r13,r1,2
+ 
+ 
+ Instruction 10:beq r0,r0,15
  
  After branching, performing
- Instruction 7:add r12 r13,r14
+ Instruction 11:add r14,r2,r2
  
-![branch and add](https://user-images.githubusercontent.com/110079631/182337772-3e40e706-8383-43a7-b9f9-28d6fbe5e942.png)
+ 
+ Instruction 12:bne r0,r1,20
+ 
+ After branching, performing
+ Instruction 13:addi r12,r4,5
+ 
+ 
+ Instruction 14:sll r15,r1,r2(2)
+ 
+ 
+ Instruction 15:srl r16,r14,r2(2)
+ 
+ 
+ Full instruction pipeline and pc-increment description Waveform
+ 
+ 
 
 ### Author
  - **Vinay Rayapati**
