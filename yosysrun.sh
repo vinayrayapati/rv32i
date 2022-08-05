@@ -6,8 +6,9 @@ read_verilog iiitb_rv32i.v
 synth -top iiitb_rv32i
 
 # mapping to mycells.lib
-dfflibmap -liberty /home/vinay.r/Desktop/iiitb_rv32i/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
-abc -liberty /home/vinay.r/Desktop/iiitb_rv32i/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+dfflibmap -liberty /Users/vinayrayapati/Desktop/Vinay/RISC-V/iiitb_rv32i-main/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+proc; opt
+abc -liberty /Users/vinayrayapati/Desktop/Vinay/RISC-V/iiitb_rv32i-main/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -script +strash;scorr;ifraig;retime,{D};strash;dch,-f;map,-M,1,{D}
 clean
 flatten
 # write synthesized design
