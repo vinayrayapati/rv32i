@@ -126,7 +126,7 @@ git clone https://github.com/YosysHQ/yosys.git
 make
 sudo make install make test
 ```
-Now you need to create a yosys_run.sh file , which the yosys script file to run the synthesis.
+Now you need to create a yosys_run.sh file , which is the yosys script file used to run the synthesis.
 The contents of the yosys_run file are given below:
 
 ```
@@ -140,7 +140,7 @@ clean
 flatten
 write_verilog -noattr iiitb_rv32i_synth.v
 ```
-Now, in the terminal of your verilog files folder and run the following commands
+Now, in the terminal of your verilog files folder, run the following commands:
 
 ```
 yosys
