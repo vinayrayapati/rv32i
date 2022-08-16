@@ -6,31 +6,31 @@
  - [2.BLOCK DIAGRAM OF RISC-V RV32I](#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)
  - [3.INSTRUCTION SET OF RISC-V RV32I](#3-INSTRUCTION-SET-OF-RISC-V-RV32I)
  - [4.FUNCTIONAL SIMULATION](#4-FUNCTIONAL-SIMULATION)
-    - [4.1-About iverilog and gtkwave](#41-About-iverilog-and-gtkwave)
-    - [4.2-Installing iverilog and gtkwave](#42-Installing-iverilog-and-gtkwave)
-    - [4.3-The output waveform](#43-The-output-waveform)
+    - [4.1 About iverilog and gtkwave](#41-About-iverilog-and-gtkwave)
+    - [4.2 Installing iverilog and gtkwave](#42-Installing-iverilog-and-gtkwave)
+    - [4.3 The output waveform](#43-The-output-waveform)
  - [5.SYNTHESIS](#5-SYNTHESIS)
-    - [5.1-Synthesis](#51-Synthesis)
-    - [5.2-Synthesizer](#52-Synthesizer)
+    - [5.1 Synthesis](#51-Synthesis)
+    - [5.2 Synthesizer](#52-Synthesizer)
  - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
 
 ## 1. RISC-V RV32I
 
 This project provides an insight into the working of a few important instructions of the instruction set of a Single cycle Reduced Instruction Set Computer - Five(RISC-V) Instruction Set Architecture suitable for use across wide-spectrum of Applications from low power embedded devices to high performance Cloud based Server processors. The base RISC-V is a 32-bit processor with 31 general-purpose registers, so all the instructions are 32-bit long. Some Applications where the RISC-V processors have begun to make some significant threads are in Artificial intelligence and machine learning, Embedded systems, Ultra Low power processing systems etc.
 
-### 2. BLOCK DIAGRAM OF RISC-V RV32I
+## 2. BLOCK DIAGRAM OF RISC-V RV32I
 ![image](https://user-images.githubusercontent.com/110079631/181293948-beb8622c-7696-4b06-b6c9-eeab9b8ab9d3.png)
 
-### 3. INSTRUCTION SET OF RISC-V RV32I
+## 3. INSTRUCTION SET OF RISC-V RV32I
 ![image](https://user-images.githubusercontent.com/110079631/181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c.png)
 
-### 4. FUNCTIONAL SIMULATION
+## 4. FUNCTIONAL SIMULATION
 
-**4.1 About iverilog and gtkwave**
+### 4.1 About iverilog and gtkwave
 - Icarus Verilog is an implementation of the Verilog hardware description language.
 - GTKWave is a fully featured GTK+ v1. 2 based wave viewer for Unix and Win32 which reads Ver Structural Verilog Compiler generated AET files as well as standard Verilog VCD/EVCD files and allows their viewing.
 
-**4.2 Installing iverilog and gtkwave**
+### 4.2 Installing iverilog and gtkwave
 
 - **For Ubuntu**
 
@@ -56,7 +56,7 @@ $ ./iiitb_rv32i
 
 `$ gtkwave iiitb_rv32i.vcd`
 
-**4.3 The output waveform**
+### 4.3 The output waveform
 
  The output waveform showing the instructions performed in a 5-stage pipelined architecture.
  
@@ -122,16 +122,18 @@ $ ./iiitb_rv32i
  
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
-### 5. SYNTHESIS
+## 5. SYNTHESIS
 
-**5.1 Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
+### 5.1 Synthesis: 
+ Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
 
 Synthesis takes place in multiple steps:
 - Converting RTL into simple logic gates.
 - Mapping those gates to actual technology-dependent logic gates available in the technology libraries.
 - Optimizing the mapped netlist keeping the constraints set by the designer intact.
 
-**5.2 Synthesizer**: It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this project.
+### 5.2 Synthesizer: 
+ It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this project.
 
 The commands to get the yosys is given belw:
 
