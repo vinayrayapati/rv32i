@@ -1,6 +1,13 @@
 
 # iiitb_rv32i-risc-v rv32i
 
+# Table of contents
+ - [RISC-V RV32I](#1-RISC-V-RV32I)
+ - [BLOCK DIAGRAM OF RISC-V RV32I](#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)
+ - [INSTRUCTION SET OF RISC-V RV32I](#3-INSTRUCTION-SET-OF-RISC-V-RV32I)
+ - [FUNCTIONAL SIMULATION](#4-FUNCTIONAL-SIMULATION)
+ - [SYNTHESIS](#5-SYNTHESIS)
+ - [GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
 
 ## RISC-V RV32I
 
@@ -12,7 +19,7 @@ This project provides an insight into the working of a few important instruction
 ### INSTRUCTION SET OF RISC-V RV32I
 ![image](https://user-images.githubusercontent.com/110079631/181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c.png)
 
-### FUNCTIONAL SIMULATION:
+### FUNCTIONAL SIMULATION
 
 **ABOUT VERILOG**
 Icarus Verilog is an implementation of the Verilog hardware description language.
@@ -20,7 +27,8 @@ Icarus Verilog is an implementation of the Verilog hardware description language
 **ABOUT GTKWAVE**
 GTKWave is a fully featured GTK+ v1. 2 based wave viewer for Unix and Win32 which reads Ver Structural Verilog Compiler generated AET files as well as standard Verilog VCD/EVCD files and allows their viewing.
 
-### Installing iverilog and gtkwave
+**Installing iverilog and gtkwave**
+
 **For Ubuntu**
 Open your terminal and type the following to install iverilog and GTKWave
 ```
@@ -43,7 +51,7 @@ $ ./iiitb_rv32i
 
 `$ gtkwave iiitb_rv32i.vcd`
 
-### The output waveform in the gtkwave
+**The output waveform in the gtkwave**
 
  The output waveform showing the instructions performed in a 5-stage pipelined architecture.
  
@@ -109,7 +117,7 @@ $ ./iiitb_rv32i
  
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
-### Synthesis
+### SYNTHESIS
 **Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
 
 Synthesis takes place in multiple steps:
@@ -147,8 +155,7 @@ yosys
 script yosys_run.sh
 ```
 Now the synthesized netlist is written in "iiitb_rv32i_synth.v" file.
-
-###Gate Level Simulation(GLS)
+### GATE LEVEL SIMULATION(GLS)
 GLS is generating the simulation output by running test bench with netlist file generated from synthesis as design under test. Netlist is logically same as RTL code, therefore, same test bench can be used for it.We perform this to verify logical correctness of the design after synthesizing it. Also ensuring the timing of the design is met.
 Folllowing are the commands to run the GLS simulation:
 ```
