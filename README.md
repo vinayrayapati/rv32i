@@ -2,12 +2,17 @@
 # iiitb_rv32i-risc-v rv32i
 
 # Table of contents
- - [RISC-V RV32I](#1-RISC-V-RV32I)
- - [BLOCK DIAGRAM OF RISC-V RV32I](#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)
- - [INSTRUCTION SET OF RISC-V RV32I](#3-INSTRUCTION-SET-OF-RISC-V-RV32I)
- - [FUNCTIONAL SIMULATION](#4-FUNCTIONAL-SIMULATION)
- - [SYNTHESIS](#5-SYNTHESIS)
- - [GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
+ - [1.RISC-V RV32I](#1-RISC-V-RV32I)
+ - [2.BLOCK DIAGRAM OF RISC-V RV32I](#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)
+ - [3.INSTRUCTION SET OF RISC-V RV32I](#3-INSTRUCTION-SET-OF-RISC-V-RV32I)
+ - [4.FUNCTIONAL SIMULATION](#4-FUNCTIONAL-SIMULATION)
+    - [4.1 About iverilog and gtkwave](#41-About-iverilog-and-gtkwave)
+    - [4.2 Installing iverilog and gtkwave](#42-Installing-iverilog-and-gtkwave)
+    - [4.3 The output waveform](#43-The-output-waveform)
+ - [5.SYNTHESIS](#5-SYNTHESIS)
+    - [5.1 Synthesis](#51-Synthesis)
+    - [5.2 Synthesizer](#52-Synthesizer)
+ - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
 
 ## 1. RISC-V RV32I
 
@@ -21,37 +26,37 @@ This project provides an insight into the working of a few important instruction
 
 ### 4. FUNCTIONAL SIMULATION
 
-**ABOUT VERILOG**
-Icarus Verilog is an implementation of the Verilog hardware description language.
+**4.1 About iverilog and gtkwave**
+- Icarus Verilog is an implementation of the Verilog hardware description language.
+- GTKWave is a fully featured GTK+ v1. 2 based wave viewer for Unix and Win32 which reads Ver Structural Verilog Compiler generated AET files as well as standard Verilog VCD/EVCD files and allows their viewing.
 
-**ABOUT GTKWAVE**
-GTKWave is a fully featured GTK+ v1. 2 based wave viewer for Unix and Win32 which reads Ver Structural Verilog Compiler generated AET files as well as standard Verilog VCD/EVCD files and allows their viewing.
+**4.2 Installing iverilog and gtkwave**
 
-**Installing iverilog and gtkwave**
+- **For Ubuntu**
 
-**For Ubuntu**
-Open your terminal and type the following to install iverilog and GTKWave
-```
-$   sudo apt get update
-$   sudo apt get install iverilog gtkwave
-```
+ Open your terminal and type the following to install iverilog and GTKWave
+ ```
+ $   sudo apt get update
+ $   sudo apt get install iverilog gtkwave
+ ```
 
-**To clone the repository and download the netlist files for simulation , enter the following commands in your terminal.**
+- **To clone the repository and download the netlist files for simulation , enter the following commands in your terminal.**
 
-```
-$ git clone https://github.com/vinayrayapati/iiitb_rv32i
-$ cd iiitb_rv32i
-```
-**To simulate and run the verilog code , enter the following commands in your terminal.**
+ ```
+ $ git clone https://github.com/vinayrayapati/iiitb_rv32i
+ $ cd iiitb_rv32i
+ ```
+- **To simulate and run the verilog code , enter the following commands in your terminal.**
+
 ```
 $ iverilog -o iiitb_rv32i iiitb_rv32i.v iiitb_rv32i_tb.v
 $ ./iiitb_rv32i
 ```
-**To see the output waveform in gtkwave, enter the following commands in your terminal.**
+- **To see the output waveform in gtkwave, enter the following commands in your terminal.**
 
 `$ gtkwave iiitb_rv32i.vcd`
 
-**The output waveform in the gtkwave**
+**4.3 The output waveform**
 
  The output waveform showing the instructions performed in a 5-stage pipelined architecture.
  
@@ -118,14 +123,15 @@ $ ./iiitb_rv32i
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
 ### 5. SYNTHESIS
-**Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
+
+**5.1 Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
 
 Synthesis takes place in multiple steps:
 - Converting RTL into simple logic gates.
 - Mapping those gates to actual technology-dependent logic gates available in the technology libraries.
 - Optimizing the mapped netlist keeping the constraints set by the designer intact.
 
-**Synthesizer**: It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this project.
+**5.2 Synthesizer**: It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this project.
 
 The commands to get the yosys is given belw:
 
