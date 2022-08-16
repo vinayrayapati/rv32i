@@ -140,12 +140,28 @@ clean
 flatten
 write_verilog -noattr iiitb_rv32i_synth.v
 ```
-Now, come back to the terminal of your verilog files folder and run the following commands
+Now, in the terminal of your verilog files folder and run the following commands
 
 ```
 yosys
 script yosys_run.sh
 ```
+Now the synthesized netlist is written in "iiitb_rv32i_synth.v" file.
+
+###Gate Level Simulation(GLS)
+GLS is generating the simulation output by running test bench with netlist file generated from synthesis as design under test. Netlist is logically same as RTL code, therefore, same test bench can be used for it.We perform this to verify logical correctness of the design after synthesizing it. Also ensuring the timing of the design is met.
+Folllowing are the commands to run the GLS simulation:
+```
+iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 ../verilog_model/primitives.v ../verilog_model/sky130_fd_sc_hd.v iiitb_rv32i_synth.v iiitb_rv32i_tb.v
+./a.out
+gtkwave iiitb_rv32i.vcd
+```
+The gtkwave output for the netlist should match the output waveform for the RTL design file. As netlist and design code have same set of inputs and outputs, we can use the same testbench and compare the waveforms.
+
+The output waveform of the synthesized netlist given below:
+<img width="1130" alt="Screenshot 2022-08-16 at 8 44 34 AM" src="https://user-images.githubusercontent.com/110079631/184832803-7b35ffc3-8dcd-4aa4-a214-bd360100f7e8.png">
+
+
 ### Author
  - **Vinay Rayapati**
 
