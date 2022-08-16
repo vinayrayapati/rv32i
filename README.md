@@ -109,7 +109,43 @@ $ ./iiitb_rv32i
  
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
+### Synthesis
+**Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
 
+Synthesis takes place in multiple steps:
+- Converting RTL into simple logic gates.
+- Mapping those gates to actual technology-dependent logic gates available in the technology libraries.
+- Optimizing the mapped netlist keeping the constraints set by the designer intact.
+
+**Synthesizer**: It is a tool we use to convert out RTL design code to netlist. Yosys is the tool I've used in this project.
+
+The commands to get the yosys is given belw:
+
+```
+git clone https://github.com/YosysHQ/yosys.git
+make
+sudo make install make test
+```
+Now you need to create a yosys_run.sh file , which the yosys script file to run the synthesis.
+The contents of the yosys_run file are given below:
+
+```
+read_liberty -lib lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog iiitb_rv32i.v
+synth -top iiitb_rv32i	
+dfflibmap -liberty lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+proc ; opt
+abc -liberty lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+clean
+flatten
+write_verilog -noattr iiitb_rv32i_synth.v
+```
+Now, come back to the terminal of your verilog files folder and run the following commands
+
+```
+yosys
+script yosys_run.sh
+```
 ### Author
  - **Vinay Rayapati**
 
