@@ -6,12 +6,12 @@
  - [2.BLOCK DIAGRAM OF RISC-V RV32I](#2-BLOCK-DIAGRAM-OF-RISC-V-RV32I)
  - [3.INSTRUCTION SET OF RISC-V RV32I](#3-INSTRUCTION-SET-OF-RISC-V-RV32I)
  - [4.FUNCTIONAL SIMULATION](#4-FUNCTIONAL-SIMULATION)
-    - [4.1 About iverilog and gtkwave](#41-About-iverilog-and-gtkwave)
-    - [4.2 Installing iverilog and gtkwave](#42-Installing-iverilog-and-gtkwave)
-    - [4.3 The output waveform](#43-The-output-waveform)
+    - [4.1-About iverilog and gtkwave](#41-About-iverilog-and-gtkwave)
+    - [4.2-Installing iverilog and gtkwave](#42-Installing-iverilog-and-gtkwave)
+    - [4.3-The output waveform](#43-The-output-waveform)
  - [5.SYNTHESIS](#5-SYNTHESIS)
-    - [5.1 Synthesis](#51-Synthesis)
-    - [5.2 Synthesizer](#52-Synthesizer)
+    - [5.1-Synthesis](#51-Synthesis)
+    - [5.2-Synthesizer](#52-Synthesizer)
  - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
 
 ## 1. RISC-V RV32I
