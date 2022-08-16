@@ -9,17 +9,17 @@
  - [SYNTHESIS](#5-SYNTHESIS)
  - [GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
 
-## 1.RISC-V RV32I
+## 1. RISC-V RV32I
 
 This project provides an insight into the working of a few important instructions of the instruction set of a Single cycle Reduced Instruction Set Computer - Five(RISC-V) Instruction Set Architecture suitable for use across wide-spectrum of Applications from low power embedded devices to high performance Cloud based Server processors. The base RISC-V is a 32-bit processor with 31 general-purpose registers, so all the instructions are 32-bit long. Some Applications where the RISC-V processors have begun to make some significant threads are in Artificial intelligence and machine learning, Embedded systems, Ultra Low power processing systems etc.
 
-### 2.BLOCK DIAGRAM OF RISC-V RV32I
+### 2. BLOCK DIAGRAM OF RISC-V RV32I
 ![image](https://user-images.githubusercontent.com/110079631/181293948-beb8622c-7696-4b06-b6c9-eeab9b8ab9d3.png)
 
-### 3.INSTRUCTION SET OF RISC-V RV32I
+### 3. INSTRUCTION SET OF RISC-V RV32I
 ![image](https://user-images.githubusercontent.com/110079631/181298133-60269bc2-01da-4b5c-8b42-69057b8dc15c.png)
 
-### 4.FUNCTIONAL SIMULATION
+### 4. FUNCTIONAL SIMULATION
 
 **ABOUT VERILOG**
 Icarus Verilog is an implementation of the Verilog hardware description language.
@@ -117,7 +117,7 @@ $ ./iiitb_rv32i
  
  <img width="1325" alt="full-pipeline-description" src="https://user-images.githubusercontent.com/110079631/183015739-3666a275-557b-43a4-b024-542e0aeb7975.png">
 
-### 5.SYNTHESIS
+### 5. SYNTHESIS
 **Synthesis**: Synthesis transforms the simple RTL design into a gate-level netlist with all the constraints as specified by the designer. In simple language, Synthesis is a process that converts the abstract form of design to a properly implemented chip in terms of logic gates.
 
 Synthesis takes place in multiple steps:
@@ -155,7 +155,7 @@ yosys
 script yosys_run.sh
 ```
 Now the synthesized netlist is written in "iiitb_rv32i_synth.v" file.
-### 6.GATE LEVEL SIMULATION(GLS)
+### 6. GATE LEVEL SIMULATION(GLS)
 GLS is generating the simulation output by running test bench with netlist file generated from synthesis as design under test. Netlist is logically same as RTL code, therefore, same test bench can be used for it.We perform this to verify logical correctness of the design after synthesizing it. Also ensuring the timing of the design is met.
 Folllowing are the commands to run the GLS simulation:
 ```
