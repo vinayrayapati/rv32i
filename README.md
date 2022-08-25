@@ -245,6 +245,10 @@ $   cd ../../../
 $   sudo make mount
 $   ./flow.tcl -design iiitb_rv32i
 ```
+
+The final layout:
+<img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
+
 ### Author
  - **Vinay Rayapati**
 
