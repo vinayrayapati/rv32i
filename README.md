@@ -176,8 +176,7 @@ The gtkwave output for the netlist should match the output waveform for the RTL 
 The output waveform of the synthesized netlist given below:
 <img width="1130" alt="Screenshot 2022-08-16 at 8 44 34 AM" src="https://user-images.githubusercontent.com/110079631/184832803-7b35ffc3-8dcd-4aa4-a214-bd360100f7e8.png">
 
-###PHYSICAL DESIGN 
-## Final Layout
+## PHYSICAL DESIGN 
 #### Openlane
 OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, CU-GR, Klayout and a number of custom scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
 
