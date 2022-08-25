@@ -13,6 +13,11 @@
     - [5.1 Synthesis](#51-Synthesis)
     - [5.2 Synthesizer](#52-Synthesizer)
  - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
+ - [7.PHYSICAL DESIGN](#7-PHYSICAL-DESIGN)
+    - [7.1 Openlane](#71-Openlane)
+    - [7.2 Installation Instructions](#72-Installation-Instructions)
+    - [7.3 Magic](#73-Magic)
+    - [7.4 Generating Layout](#74-Generating-Layout)
 
 ## 1. RISC-V RV32I
 
@@ -163,7 +168,7 @@ yosys
 script yosys_run.sh
 ```
 Now the synthesized netlist is written in "iiitb_rv32i_synth.v" file.
-### 6. GATE LEVEL SIMULATION(GLS)
+## 6. GATE LEVEL SIMULATION(GLS)
 GLS is generating the simulation output by running test bench with netlist file generated from synthesis as design under test. Netlist is logically same as RTL code, therefore, same test bench can be used for it.We perform this to verify logical correctness of the design after synthesizing it. Also ensuring the timing of the design is met.
 Folllowing are the commands to run the GLS simulation:
 ```
@@ -176,12 +181,12 @@ The gtkwave output for the netlist should match the output waveform for the RTL 
 The output waveform of the synthesized netlist given below:
 <img width="1130" alt="Screenshot 2022-08-16 at 8 44 34 AM" src="https://user-images.githubusercontent.com/110079631/184832803-7b35ffc3-8dcd-4aa4-a214-bd360100f7e8.png">
 
-## PHYSICAL DESIGN 
-#### Openlane
+## 7. PHYSICAL DESIGN 
+### 7.1 Openlane
 OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, CU-GR, Klayout and a number of custom scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
 
 more at https://github.com/The-OpenROAD-Project/OpenLane
-#### Installation instructions 
+### 7.2 Installation instructions 
 ```
 $   apt install -y build-essential python3 python3-venv python3-pip
 ```
@@ -199,7 +204,7 @@ $ sudo make test
 ```
 It takes approximate time of 5min to complete. After 43 steps, if it ended with saying **Basic test passed** then open lane installed succesfully.
 
-#### Magic
+### 7.3 Magic
 Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
 
 More about magic at http://opencircuitdesign.com/magic/index.html
@@ -228,7 +233,7 @@ $   sudo make install
 ```
 type **magic** terminal to check whether it installed succesfully or not. type **exit** to exit magic.
 
-**Generating Layout**
+### 7.4 Generating Layout
 
 
 Open terminal in home directory
@@ -245,7 +250,7 @@ $   cd ../../../
 $   sudo make mount
 $   ./flow.tcl -design iiitb_rv32i
 ```
-To see the layout we use a tool called magic which we installed earlier.Type the following command in the terminal opened in the <path to your design>/runs/<latest run folder>/final/def/
+To see the layout we use a tool called magic which we installed earlier.Type the following command in the terminal opened in the path to your design/runs/latest run folder/final/def/
  
 ```
 $   magic -T /home/parallels/Desktop/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../../tmp/merged.max.lef def read iiitb_rv32i.def &
