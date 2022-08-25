@@ -245,6 +245,11 @@ $   cd ../../../
 $   sudo make mount
 $   ./flow.tcl -design iiitb_rv32i
 ```
+To see the layout we use a tool called magic which we installed earlier.Type the following command in the terminal opened in the <path to your design>/runs/<latest run folder>/final/def/
+ 
+```
+$   magic -T /home/parallels/Desktop/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../../tmp/merged.max.lef def read iiitb_rv32i.def &
+```
 
 The final layout:
 <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
