@@ -332,10 +332,9 @@ Here we are going to customise our layout by including our custom made **sky130_
      "TEST_EXTERNAL_GLOB":"dir::../iiitb_rv32i/src/*",
      "SYNTH_DRIVING_CELL":"sky130_vsdinv"
      ```
- - ***INTERACTIVE MODE***
+ - ***2 . INTERACTIVE MODE***
  We need to run the openlane now in the interactive mode to include our custom made lef file before synthesis.Such that the openlane recognises our lef files during the flow for mapping.
       - **1. Running openlane in interactive mode**
-      
         The commands to the run the flow in interactive mode is given below:
         ```
         cd OpenLane
@@ -349,14 +348,11 @@ Here we are going to customise our layout by including our custom made **sky130_
         set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
         add_lefs -src $lefs
         ```
-      - **3. SYNTHESIS**
-        
+   - ***3 . SYNTHESIS***
          * The command to run the synthesis is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
-      
          * The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
         
            ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
-
          * Calcuation of Flop Ratio:
   
            ```
@@ -366,12 +362,11 @@ Here we are going to customise our layout by including our custom made **sky130_
                         Total Number of cells
   
            ```
-        
          * The slack report including the **sky130_vsdinv** cell is shown below:
         
            ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
         
-      - **4. FLOORPLAN**
+   - ***4 . FLOORPLAN***
       
          * Importance of files in increasing priority order:
 
@@ -401,7 +396,7 @@ Here we are going to customise our layout by including our custom made **sky130_
            magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
            ```
          * 
-      - **5. PLACEMENT**
+   - ***5 . PLACEMENT***
          
          * The next step in the OpenLANE ASIC flow is placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
            1. Global Placement: It finds optimal position for all cells which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length.
@@ -414,11 +409,37 @@ Here we are going to customise our layout by including our custom made **sky130_
            ```
            magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
            ```
+   _ ***6 . CLOCK TREE SYNTHESIS***
          
-  
-The included vsdinv cell in the layout is :
-![image](https://user-images.githubusercontent.com/110079631/187410184-f18d0cbd-0b8c-434b-8267-c12dccce1d41.png)
-
+         * The purpose of building a clock tree is enable the clock input to reach every element and to ensure a zero clock skew. H-tree is a common methodology followed in CTS.
+         Before attempting a CTS run in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the ```write_verilog``` command. Then, the synthesis, floorplan and placement is run again. To run CTS use the below command:
+         ```
+         run_cts
+         ```
+         * 
+   - ***7 . ROUTING***
+          
+          * OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:
+            1. Global routing: Routing region is divided into rectangle grids which are represented as course 3D routes (Fastroute tool).
+            2. Detailed routing: Finer grids and routing guides used to implement physical wiring (TritonRoute tool). 
+          * Features of TritonRoute:
+            1. Honouring pre-processed route guides
+            2. Assumes that each net satisfies inter guide connectivity
+            3. Uses MILP based panel routing scheme
+            4. Intra-layer parallel and inter-layer sequential routing framework
+          * Running routing step in TritonRoute as part of openLANE flow:
+            ```
+            run_routing
+            ```
+          * `run_routing` - To start the routing
+            1. The options for routing can be set in the `config.tcl` file. 
+            2. The optimisations in routing can also be done by specifying the routing strategy to use different version of `TritonRoute Engine`. There is a trade0ff between the optimised route and the runtime for routing.
+            3. The routing stage must have the `CURRENT_DEF` set to `pdn.def`.
+            4. The two stages of routing are performed by the following engines:
+                 - Global Route   : Fast Route
+                 - Detailed Route : Triton Route
+            5. Fast Route generates the routing guides, whereas Triton Route uses the Global Route and then completes the routing with some strategies and optimisations for finding the best possible path connect the pins.
+          * 
                
 
 ### Author
