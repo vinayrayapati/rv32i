@@ -406,6 +406,7 @@ Here we are going to customise our layout by including our custom made **sky130_
          ![fp_magic](https://user-images.githubusercontent.com/110079631/187487868-709acb9b-11ec-4777-b6e5-09b910e066d1.png)
 
       * **6. Die Area post floorplan:**
+      
          ![diearea_fp](https://user-images.githubusercontent.com/110079631/187488369-54c0f4ed-bbad-4cfb-a03f-e5c6873c643f.png)
 
   - ***6 . PLACEMENT***
@@ -497,7 +498,8 @@ Here we are going to customise our layout by including our custom made **sky130_
          ```
          magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
          ```
-          ![rout_term](https://user-images.githubusercontent.com/110079631/187503400-5158bdbe-fdf4-4e79-a490-5645f377c3fa.png)
+          ![routing_mag](https://user-images.githubusercontent.com/110079631/187505236-a98b9faf-89e3-455c-b3e7-83ffa644428a.png)
+
 
        * **6. sky130_vsdinv cell post routing:**
 
