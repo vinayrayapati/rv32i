@@ -260,6 +260,30 @@ The final layout:
 
 <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
 
+### 7.5 Customizing the layout
+
+Here we are going to customise our layout by including our custom made sky130_vsdinv cell into our layout.
+               
+***INCLUDING THE SKY130_VSDINV CELL***
+
+Modify the json file by including the following lines:
+
+    ```
+    "PL_RANDOM_GLB_PLACEMENT": 1,
+    "PL_TARGET_DENSITY": 0.5,
+    "FP_SIZING": "relative",
+    "LIB_SYNTH":"dir::src/sky130_fd_sc_hd__typical.lib",
+    "LIB_FASTEST":"dir::src/sky130_fd_sc_hd__fast.lib",
+    "LIB_SLOWEST":"dir::src/sky130_fd_sc_hd__slow.lib",
+    "LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
+    "TEST_EXTERNAL_GLOB":"dir::../iiitb_rv32i/src/*",
+    "SYNTH_DRIVING_CELL":"sky130_vsdinv"
+    ```
+The included vsdinv cell in the layout is :
+![image](https://user-images.githubusercontent.com/110079631/187410184-f18d0cbd-0b8c-434b-8267-c12dccce1d41.png)
+
+               
+
 ### Author
  - **Vinay Rayapati**
 
