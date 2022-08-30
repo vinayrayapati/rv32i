@@ -182,11 +182,34 @@ The output waveform of the synthesized netlist given below:
 <img width="1130" alt="Screenshot 2022-08-16 at 8 44 34 AM" src="https://user-images.githubusercontent.com/110079631/184832803-7b35ffc3-8dcd-4aa4-a214-bd360100f7e8.png">
 
 ## 7. PHYSICAL DESIGN 
-### 7.1 Openlane
+
+### 7.1 Overview of Physical Design flow
+Place and Route (PnR) is the core of any ASIC implementation and Openlane flow integrates into it several key open source tools which perform each of the respective stages of PnR.
+Below are the stages and the respective tools (in ( )) that are called by openlane for the functionalities as described:
+- Synthesis
+  - Generating gate-level netlist ([yosys](https://github.com/YosysHQ/yosys)).
+  - Performing cell mapping ([abc](https://github.com/YosysHQ/yosys)).
+  - Performing pre-layout STA ([OpenSTA](https://github.com/The-OpenROAD-Project/OpenSTA)).
+- Floorplanning
+  - Defining the core area for the macro as well as the cell sites and the tracks ([init_fp](https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/init_fp)).
+  - Placing the macro input and output ports ([ioplacer](https://github.com/The-OpenROAD-Project/ioPlacer/)).
+  - Generating the power distribution network ([pdn](https://github.com/The-OpenROAD-Project/pdn/)).
+- Placement
+  - Performing global placement ([RePLace](https://github.com/The-OpenROAD-Project/RePlAce)).
+  - Perfroming detailed placement to legalize the globally placed components ([OpenDP](https://github.com/The-OpenROAD-Project/OpenDP)).
+- Clock Tree Synthesis (CTS)
+  - Synthesizing the clock tree ([TritonCTS](https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/TritonCTS)).
+- Routing
+  - Performing global routing to generate a guide file for the detailed router ([FastRoute](https://github.com/The-OpenROAD-Project/FastRoute/tree/openroad)).
+  - Performing detailed routing ([TritonRoute](https://github.com/The-OpenROAD-Project/TritonRoute))
+- GDSII Generation
+  - Streaming out the final GDSII layout file from the routed def ([Magic](https://github.com/RTimothyEdwards/magic)).
+
+### 7.2 Openlane
 OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, CU-GR, Klayout and a number of custom scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
 
 more at https://github.com/The-OpenROAD-Project/OpenLane
-### 7.2 Installation instructions 
+### 7.3 Installation instructions 
 ```
 $   apt install -y build-essential python3 python3-venv python3-pip
 ```
@@ -204,7 +227,7 @@ $ sudo make test
 ```
 It takes approximate time of 5min to complete. After 43 steps, if it ended with saying **Basic test passed** then open lane installed succesfully.
 
-### 7.3 Magic
+### 7.4 Magic
 Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
 
 More about magic at http://opencircuitdesign.com/magic/index.html
@@ -233,8 +256,9 @@ $   sudo make install
 ```
 type **magic** terminal to check whether it installed succesfully or not. type **exit** to exit magic.
 
-### 7.4 Generating Layout
+### 7.5 Generating Layout
 
+**NON-INTERACTIVE MODE**
 
 Open terminal in home directory
 ```
@@ -260,25 +284,92 @@ The final layout:
 
 <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
 
-### 7.5 Customizing the layout
+### 7.6 Customizing the layout
 
-Here we are going to customise our layout by including our custom made sky130_vsdinv cell into our layout.
+Here we are going to customise our layout by including our custom made **sky130_vsdinv cell** into our layout.
+
+- ***CREATING THE SKY130_VSDINV CELL LEF FILE***
+   - You need to first get the git repository of the **vsdstdccelldesign**.To get the repository type the following command:
+
+     ``` git clone https://github.com/nickson-jose/vsdstdcelldesign.git ```
+   - Now you need to copy your tech file **sky130A.tech** to this folder.
+   - Next run the magic command to open the **sky130_vsdinv.mag** file.Use the following command:
+     
+     ``` magic -T sky130A.tech sky130_vsdinv.mag& ```
+     
+     The image showing the invoked magic tool using the above command:
+     
+     ![Screenshot from 2022-08-30 18-04-31](https://user-images.githubusercontent.com/110079631/187439712-1d3dcbbd-8b00-4eae-a78e-4f19694d4234.png)
+
+   - The next step is setting port class and port use attributes. The "class" and "use" properties of the port have no internal meaning to magic but are used by the LEF and DEF format read and write routines, and match the LEF/DEF CLASS and USE properties for macro cell pins. Valid classes are: default, input, output, tristate, bidirectional, inout, feedthrough, and feedthru. Valid uses are: default, analog, signal, digital, power, ground, and clock. These attributes are set in tkcon window (after selecting each port on layout window. A keyboard shortcut would be repeatedly pressing **s** till that port gets highlighed).
+     The tkcon command window of the port classification is shown in the image below:
+          
+     ![port_define](https://user-images.githubusercontent.com/110079631/187438423-d08803fb-2375-495b-9de7-c46a2aadda00.JPG)
+    
+   - In the next step, use `lef write` command to write the LEF file with the same nomenclature as that of the layout (.mag) file.This will create a **sky130_vsdinv.lef** file in the same folder.
+   
+      ![lef_write](https://user-images.githubusercontent.com/110079631/187439794-340e3c4d-65fc-48ad-8c2b-12ee5054e69f.PNG)
                
-***INCLUDING THE SKY130_VSDINV CELL***
+- ***INCLUDING THE SKY130_VSDINV CELL***
 
-Modify the json file by including the following lines:
+   - You need to copy the **lib** files and the created **sky130_vsinv.lef** file to your design src directory.The src directory image with its contents is shown below:
+     
+     ![Screenshot from 2022-08-30 18-07-41](https://user-images.githubusercontent.com/110079631/187441835-503799ab-801f-4d41-b943-45b3202a7beb.png)
 
-    ```
-    "PL_RANDOM_GLB_PLACEMENT": 1,
-    "PL_TARGET_DENSITY": 0.5,
-    "FP_SIZING": "relative",
-    "LIB_SYNTH":"dir::src/sky130_fd_sc_hd__typical.lib",
-    "LIB_FASTEST":"dir::src/sky130_fd_sc_hd__fast.lib",
-    "LIB_SLOWEST":"dir::src/sky130_fd_sc_hd__slow.lib",
-    "LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
-    "TEST_EXTERNAL_GLOB":"dir::../iiitb_rv32i/src/*",
-    "SYNTH_DRIVING_CELL":"sky130_vsdinv"
-    ```
+   - Next,Modify the json file by including the following lines:
+
+     ```
+     "PL_RANDOM_GLB_PLACEMENT": 1,
+     "PL_TARGET_DENSITY": 0.5,
+     "FP_SIZING": "relative",
+     "LIB_SYNTH":"dir::src/sky130_fd_sc_hd__typical.lib",
+     "LIB_FASTEST":"dir::src/sky130_fd_sc_hd__fast.lib",
+     "LIB_SLOWEST":"dir::src/sky130_fd_sc_hd__slow.lib",
+     "LIB_TYPICAL":"dir::src/sky130_fd_sc_hd__typical.lib",
+     "TEST_EXTERNAL_GLOB":"dir::../iiitb_rv32i/src/*",
+     "SYNTH_DRIVING_CELL":"sky130_vsdinv"
+     ```
+ - ***INTERACTIVE MODE***
+ We need to run the openlane now in the interactive mode to include our custom made lef file before synthesis.Such that the openlane recognises our lef files during the flow for mapping.
+      - **1.Running openlane in interactive mode**
+        The commands to the run the flow in interactive mode is given below:
+        ```
+        cd OpenLane
+        sudo make mount
+        ./flow.tcl -interactive
+        ```
+      - **2.Preparing the design and including the lef files**
+        The commands to prepare the design and overwite in a existing run folder the reports and results along with the command to include the lef files is given below:
+        ```
+        prep -design iiitb_rv32i -tag run -overwrite
+        set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+        add_lefs -src $lefs
+        ```
+      - **3.SYNTHESIS**
+        The command to run the synthesis is `run_synthesis`.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
+      
+        The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
+        
+        ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
+
+        Calcuation of Flop Ratio:
+  
+        ```
+  
+        Flop ratio = Number of D Flip flops 
+                     ______________________
+                     Total Number of cells
+  
+        Flop Ratio = 4/8=0.5
+        ```
+        
+        The slack report including the **sky130_vsdinv** cell is shown below:
+        
+        ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
+        
+      - **4.FLOORPLAN**
+        
+  
 The included vsdinv cell in the layout is :
 ![image](https://user-images.githubusercontent.com/110079631/187410184-f18d0cbd-0b8c-434b-8267-c12dccce1d41.png)
 
