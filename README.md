@@ -333,7 +333,7 @@ Here we are going to customise our layout by including our custom made **sky130_
      "TEST_EXTERNAL_GLOB":"dir::../iiitb_rv32i/src/*",
      "SYNTH_DRIVING_CELL":"sky130_vsdinv"
      ```
- - ***2 . INTERACTIVE MODE:***
+ - ***3 . INTERACTIVE MODE:***
    We need to run the openlane now in the interactive mode to include our custom made lef file before synthesis.Such that the openlane recognises our lef files during the flow for mapping.
       - **1. Running openlane in interactive mode:**
         The commands to the run the flow in interactive mode is given below:
@@ -403,7 +403,11 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
-      * 
+         ![fp_magic](https://user-images.githubusercontent.com/110079631/187487868-709acb9b-11ec-4777-b6e5-09b910e066d1.png)
+
+      * **6. Die Area post floorplan:**
+         ![diearea_fp](https://user-images.githubusercontent.com/110079631/187488369-54c0f4ed-bbad-4cfb-a03f-e5c6873c643f.png)
+
   - ***6 . PLACEMENT***
          
       * **1. The next step in the OpenLANE ASIC flow is** placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
@@ -418,6 +422,28 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
+         ![post_placement](https://user-images.githubusercontent.com/110079631/187488913-3c2ea6a6-f7ba-4168-9066-c4a1b92b0710.png)
+
+      * **4. sky130_vsdinv cell post placement:**
+     
+         ![vsdinv_pl_mag](https://user-images.githubusercontent.com/110079631/187489142-1cc268db-180b-44c5-9294-248b4c4af05f.png)
+      
+      * **5. sky130_vsdinv cell post placement** after using `expand` command in the tkcon window:
+         ![Screenshot from 2022-08-29 18-42-33](https://user-images.githubusercontent.com/110079631/187489543-499977d7-fed2-49d9-9b1b-e29448cb5bc8.png)
+
+      * **6. Area report post placement_resizing:**
+
+         ![area_syn](https://user-images.githubusercontent.com/110079631/187489763-adf61607-a8e0-474b-b8a9-c2d9f30c617e.png)
+
+      * **7. sky130_vsdinv slack post placement_resizing_sta:**
+
+         ![vsdinv_pl](https://user-images.githubusercontent.com/110079631/187490345-503aafc1-e97a-4628-958e-c29289ee614b.png)
+
+      * **8. Post placement slack report:**
+
+         ![slack_](https://user-images.githubusercontent.com/110079631/187498925-0801624a-c7d9-4e1a-aadc-bb026025a17a.png)
+
+
   - ***7 . CLOCK TREE SYNTHESIS***
          
       * **1. The purpose** of building a clock tree is enable the clock input to reach every element and to ensure a zero clock skew. H-tree is a common methodology followed in CTS.
@@ -426,7 +452,21 @@ Here we are going to customise our layout by including our custom made **sky130_
          ```
          run_cts
          ```
-      * 
+          ![cts_term](https://user-images.githubusercontent.com/110079631/187499041-43537aa2-8968-41e2-93c4-9edb006ad9d8.png)
+
+      * **3. Slack report post_cts:**
+
+         ![slackreport_cts](https://user-images.githubusercontent.com/110079631/187499991-2c1315eb-5f4c-4555-b962-7c5eacdc20f0.png)
+
+      * **4. Power report post_cts:**
+
+         ![power_cts](https://user-images.githubusercontent.com/110079631/187500327-50253964-e644-452e-ab6e-3743d53630e8.png)
+
+      * **5. Clock skew report post_cts:**
+
+         <img width="518" alt="Screenshot 2022-08-30 at 10 36 14 PM" src="https://user-images.githubusercontent.com/110079631/187500933-8ed32076-aa28-416b-8e2f-a156f7bdfb4c.png">
+
+    
   - ***8 . ROUTING***
           
       * **1. OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:**
@@ -441,6 +481,8 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
         run_routing
         ```
+         ![rout_term](https://user-images.githubusercontent.com/110079631/187501879-562c5dca-0fbb-4e62-8554-21f24ffbde1e.png)
+
       * **4. ***Do know*  in routing stage**
          1. `run_routing` - To start the routing
          2. The options for routing can be set in the `config.tcl` file. 
@@ -450,8 +492,33 @@ Here we are going to customise our layout by including our custom made **sky130_
               - Global Route   : Fast Route
               - Detailed Route : Triton Route
          6. Fast Route generates the routing guides, whereas Triton Route uses the Global Route and then completes the routing with some strategies and optimisations for finding the best possible path connect the pins.
-       * 
-               
+       * **5. Layout in magic tool post routing:** the design can be viewed on magic within ```results/routing``` directory.
+         Run the follwing command in that directory:
+         ```
+         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
+         ```
+          ![rout_term](https://user-images.githubusercontent.com/110079631/187503400-5158bdbe-fdf4-4e79-a490-5645f377c3fa.png)
+
+       * **6. sky130_vsdinv cell post routing:**
+
+          ![vsd_rout_mag](https://user-images.githubusercontent.com/110079631/187503820-c11ab19e-e9f8-473d-8647-b0038fac1b83.png)
+
+       * **7. sky130_vsdinv cell post routing** after using `expand` command in the tkcon window:
+
+          ![rout_mag_vsd](https://user-images.githubusercontent.com/110079631/187504001-92e042cf-927d-4848-a36e-695d8b8e03b4.png)
+
+       * **8. congestion report post routing:** 
+
+          ![congestion_rout](https://user-images.githubusercontent.com/110079631/187504308-473f872d-eb03-455c-a6be-caf683953840.png)
+ 
+       * **9. slack report post routing:**
+
+          ![slackreport_routing](https://user-images.githubusercontent.com/110079631/187504503-2eca5efa-beb3-4009-b452-ad443f3a45df.png)
+    
+       * **10. Area using `box` command:**
+
+          ![box_cmd](https://user-images.githubusercontent.com/110079631/187504758-263b0cd8-11a1-4fa4-9c86-9b941ef62c5e.png)
+
 
 ### Author
  - **Vinay Rayapati**
