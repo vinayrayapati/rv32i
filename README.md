@@ -12,7 +12,7 @@
  - [5.SYNTHESIS](#5-SYNTHESIS)
     - [5.1 Synthesis](#51-Synthesis)
     - [5.2 Synthesizer](#52-Synthesizer)
- - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
+ - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-GLS)
  - [7.PHYSICAL DESIGN](#7-PHYSICAL-DESIGN)
     - [7.1 Overview of Physical Design flow](#71-Overview-of-Physical-Design-flow)
     - [7.2 Openlane](#72-Openlane)
