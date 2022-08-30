@@ -484,7 +484,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
          ![rout_term](https://user-images.githubusercontent.com/110079631/187501879-562c5dca-0fbb-4e62-8554-21f24ffbde1e.png)
 
-      * **4. ***Do know*  in routing stage**
+      * **4. *Do know*  in routing stage**
          1. `run_routing` - To start the routing
          2. The options for routing can be set in the `config.tcl` file. 
          3. The optimisations in routing can also be done by specifying the routing strategy to use different version of `TritonRoute Engine`. There is a trade0ff between the optimised route and the runtime for routing.
