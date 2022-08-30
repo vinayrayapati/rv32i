@@ -14,7 +14,7 @@
     - [5.2 Synthesizer](#52-Synthesizer)
  - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-(GLS))
  - [7.PHYSICAL DESIGN](#7-PHYSICAL-DESIGN)
-    - [7.1 Overview of Physical Design flow](#7 . 1-Overview-of-Physical-Design-flow)
+    - [7.1 Overview of Physical Design flow](#71-Overview-of-Physical-Design-flow)
     - [7.2 Openlane](#72-Openlane)
     - [7.3 Installation Instructions](#73-Installation-Instructions)
     - [7.4 Magic](#74-Magic)
@@ -185,7 +185,7 @@ The output waveform of the synthesized netlist given below:
 
 ## 7. PHYSICAL DESIGN 
 
-### 7 . 1 Overview of Physical Design flow
+### 7.1 Overview of Physical Design flow
 Place and Route (PnR) is the core of any ASIC implementation and Openlane flow integrates into it several key open source tools which perform each of the respective stages of PnR.
 Below are the stages and the respective tools that are called by openlane for the functionalities as described:
 - Synthesis
@@ -207,11 +207,11 @@ Below are the stages and the respective tools that are called by openlane for th
 - GDSII Generation
   - Streaming out the final GDSII layout file from the routed def ([Magic](https://github.com/RTimothyEdwards/magic)).
 
-### 7 . 2 Openlane
+### 7.2 Openlane
 OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, CU-GR, Klayout and a number of custom scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
 
 More about Openlane at : https://github.com/The-OpenROAD-Project/OpenLane
-### 7 . 3 Installation instructions 
+### 7.3 Installation instructions 
 ```
 $   apt install -y build-essential python3 python3-venv python3-pip
 ```
@@ -229,7 +229,7 @@ $ sudo make test
 ```
 It takes approximate time of 5min to complete. After 43 steps, if it ended with saying **Basic test passed** then open lane installed succesfully.
 
-### 7 . 4 Magic
+### 7.4 Magic
 Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
 
 More about magic at http://opencircuitdesign.com/magic/index.html
@@ -258,7 +258,7 @@ $   sudo make install
 ```
 type **magic** terminal to check whether it installed succesfully or not. type **exit** to exit magic.
 
-### 7 . 5 Generating Layout
+### 7.5 Generating Layout
 
 **NON-INTERACTIVE MODE**
 Here we are generating the layout in the non-interactive mode or the automatic mode. In this we cant interact with the flow in the middle of each stage of the flow.The flow completes all the stages starting from synthesis until you obtain the final layout and the reports of various stages which specify the violations and problems if present during the flow.
@@ -287,7 +287,7 @@ Here we are generating the layout in the non-interactive mode or the automatic m
 
    <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
 
-### 7 . 6 Customizing the layout
+### 7.6 Customizing the layout
 
 Here we are going to customise our layout by including our custom made **sky130_vsdinv cell** into our layout.
 
