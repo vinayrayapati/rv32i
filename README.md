@@ -183,7 +183,7 @@ The output waveform of the synthesized netlist given below:
 
 ## 7. PHYSICAL DESIGN 
 
-### 7.1 Overview of Physical Design flow
+### 7 . 1 Overview of Physical Design flow
 Place and Route (PnR) is the core of any ASIC implementation and Openlane flow integrates into it several key open source tools which perform each of the respective stages of PnR.
 Below are the stages and the respective tools (in ( )) that are called by openlane for the functionalities as described:
 - Synthesis
@@ -205,11 +205,11 @@ Below are the stages and the respective tools (in ( )) that are called by openla
 - GDSII Generation
   - Streaming out the final GDSII layout file from the routed def ([Magic](https://github.com/RTimothyEdwards/magic)).
 
-### 7.2 Openlane
+### 7 . 2 Openlane
 OpenLane is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, CVC, SPEF-Extractor, CU-GR, Klayout and a number of custom scripts for design exploration and optimization. The flow performs full ASIC implementation steps from RTL all the way down to GDSII.
 
 more at https://github.com/The-OpenROAD-Project/OpenLane
-### 7.3 Installation instructions 
+### 7 . 3 Installation instructions 
 ```
 $   apt install -y build-essential python3 python3-venv python3-pip
 ```
@@ -227,7 +227,7 @@ $ sudo make test
 ```
 It takes approximate time of 5min to complete. After 43 steps, if it ended with saying **Basic test passed** then open lane installed succesfully.
 
-### 7.4 Magic
+### 7 . 4 Magic
 Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
 
 More about magic at http://opencircuitdesign.com/magic/index.html
@@ -256,7 +256,7 @@ $   sudo make install
 ```
 type **magic** terminal to check whether it installed succesfully or not. type **exit** to exit magic.
 
-### 7.5 Generating Layout
+### 7 . 5 Generating Layout
 
 **NON-INTERACTIVE MODE**
 
@@ -284,7 +284,7 @@ The final layout:
 
 <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
 
-### 7.6 Customizing the layout
+### 7 . 6 Customizing the layout
 
 Here we are going to customise our layout by including our custom made **sky130_vsdinv cell** into our layout.
 
@@ -296,6 +296,9 @@ Here we are going to customise our layout by including our custom made **sky130_
    - Next run the magic command to open the **sky130_vsdinv.mag** file.Use the following command:
      
      ``` magic -T sky130A.tech sky130_vsdinv.mag& ```
+     
+     * One can zoom into Magic layout by selecting an area with left and right mouse click followed by pressing "z" key. 
+     * Various components can be identified by using the ```what``` command in tkcon window after making a selection on the component.
      
      The image showing the invoked magic tool using the above command:
      
@@ -331,44 +334,87 @@ Here we are going to customise our layout by including our custom made **sky130_
      ```
  - ***INTERACTIVE MODE***
  We need to run the openlane now in the interactive mode to include our custom made lef file before synthesis.Such that the openlane recognises our lef files during the flow for mapping.
-      - **1.Running openlane in interactive mode**
+      - **1. Running openlane in interactive mode**
+      
         The commands to the run the flow in interactive mode is given below:
         ```
         cd OpenLane
         sudo make mount
         ./flow.tcl -interactive
         ```
-      - **2.Preparing the design and including the lef files**
+      - **2. Preparing the design and including the lef files**
         The commands to prepare the design and overwite in a existing run folder the reports and results along with the command to include the lef files is given below:
         ```
         prep -design iiitb_rv32i -tag run -overwrite
         set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
         add_lefs -src $lefs
         ```
-      - **3.SYNTHESIS**
-        The command to run the synthesis is `run_synthesis`.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
+      - **3. SYNTHESIS**
+        
+         * The command to run the synthesis is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
       
-        The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
+         * The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
         
-        ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
+           ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
 
-        Calcuation of Flop Ratio:
+         * Calcuation of Flop Ratio:
   
-        ```
+           ```
   
-        Flop ratio = Number of D Flip flops 
-                     ______________________
-                     Total Number of cells
+           Flop ratio = Number of D Flip flops 
+                        ______________________
+                        Total Number of cells
   
-        Flop Ratio = 4/8=0.5
-        ```
+           ```
         
-        The slack report including the **sky130_vsdinv** cell is shown below:
+         * The slack report including the **sky130_vsdinv** cell is shown below:
         
-        ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
+           ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
         
-      - **4.FLOORPLAN**
+      - **4. FLOORPLAN**
+      
+         * Importance of files in increasing priority order:
+
+           1. ```floorplan.tcl``` - System default envrionment variables
+           2. ```conifg.tcl```
+           3. ```sky130A_sky130_fd_sc_hd_config.tcl```
         
+         * Floorplan envrionment variables or switches:
+
+           1. ```FP_CORE_UTIL``` - floorplan core utilisation
+           2. ```FP_ASPECT_RATIO``` - floorplan aspect ratio
+           3. ```FP_CORE_MARGIN``` - Core to die margin area
+           4. ```FP_IO_MODE``` - defines pin configurations (1 = equidistant/0 = not equidistant)
+           5. ```FP_CORE_VMETAL``` - vertical metal layer
+           6. ```FP_CORE_HMETAL``` - horizontal metal layer
+           
+           ```Note: Usually, vertical metal layer and horizontal metal layer values will be 1 more than that specified in the file```
+        
+         * To run the Floorplan use the command `run_floorplan`.
+        
+         * Post the floorplan run, a `.def` file will have been created within the `results/floorplan` directory. 
+           We may review floorplan files by checking the `floorplan.tcl`. 
+           The system defaults will have been overriden by switches set in `conifg.tcl` and further overriden by switches set in `sky130A_sky130_fd_sc_hd_config.tcl`.
+        
+         * To view the floorplan, Magic is invoked after moving to the ```results/floorplan``` directory,then use the floowing command:
+           ```
+           magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
+           ```
+         * 
+      - **5. PLACEMENT**
+         
+         * The next step in the OpenLANE ASIC flow is placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
+           1. Global Placement: It finds optimal position for all cells which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length.
+           2. Detailed Placement: It alters the position of cells post global placement so as to legalise them.
+         
+         * To run the Placement use the command `run_Placement`.
+         
+         * Post placement, the design can be viewed on magic within ```results/placement``` directory.
+           Run the follwing command in that directory:
+           ```
+           magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
+           ```
+         
   
 The included vsdinv cell in the layout is :
 ![image](https://user-images.githubusercontent.com/110079631/187410184-f18d0cbd-0b8c-434b-8267-c12dccce1d41.png)
