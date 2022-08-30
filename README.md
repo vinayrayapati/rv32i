@@ -12,7 +12,7 @@
  - [5.SYNTHESIS](#5-SYNTHESIS)
     - [5.1 Synthesis](#51-Synthesis)
     - [5.2 Synthesizer](#52-Synthesizer)
- - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION-GLS)
+ - [6.GATE LEVEL SIMULATION](#6-GATE-LEVEL-SIMULATION)
  - [7.PHYSICAL DESIGN](#7-PHYSICAL-DESIGN)
     - [7.1 Overview of Physical Design flow](#71-Overview-of-Physical-Design-flow)
     - [7.2 Openlane](#72-Openlane)
@@ -170,7 +170,7 @@ yosys
 script yosys_run.sh
 ```
 Now the synthesized netlist is written in "iiitb_rv32i_synth.v" file.
-## 6. GATE LEVEL SIMULATION(GLS)
+## 6. GATE LEVEL SIMULATION
 GLS is generating the simulation output by running test bench with netlist file generated from synthesis as design under test. Netlist is logically same as RTL code, therefore, same test bench can be used for it.We perform this to verify logical correctness of the design after synthesizing it. Also ensuring the timing of the design is met.
 Folllowing are the commands to run the GLS simulation:
 ```
