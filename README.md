@@ -261,27 +261,27 @@ type **magic** terminal to check whether it installed succesfully or not. type *
 **NON-INTERACTIVE MODE**
 Here we are generating the layout in the non-interactive mode or the automatic mode. In this we cant interact with the flow in the middle of each stage of the flow.The flow completes all the stages starting from synthesis until you obtain the final layout and the reports of various stages which specify the violations and problems if present during the flow.
 
-*Open terminal in home directory
- ```
- $   cd OpenLane/
- $   cd designs/
- $   mkdir iiitb_iiitb_rv32i
- $   cd iiitb_iiitb_rv32i/
- $   wget https://raw.githubusercontent.com/vinayrayapati/iiitb_rv32i/main/config.json
- $   mkdir src
- $   cd src/
- $   wget https://raw.githubusercontent.com/vinayrayapati/iiitb_rv32i/main/iiitb_rv32i.v
- $   cd ../../../
- $   sudo make mount
- $   ./flow.tcl -design iiitb_rv32i
- ```
-*To see the layout we use a tool called magic which we installed earlier.Type the following command in the terminal opened in the path to your design/runs/latest run folder/final/def/
+- Open terminal in home directory
+  ```
+  $   cd OpenLane/
+  $   cd designs/
+  $   mkdir iiitb_iiitb_rv32i
+  $   cd iiitb_iiitb_rv32i/
+  $   wget https://raw.githubusercontent.com/vinayrayapati/iiitb_rv32i/main/config.json
+  $   mkdir src
+  $   cd src/
+  $   wget https://raw.githubusercontent.com/vinayrayapati/iiitb_rv32i/main/iiitb_rv32i.v
+  $   cd ../../../
+  $   sudo make mount
+  $   ./flow.tcl -design iiitb_rv32i
+  ```
+- To see the layout we use a tool called magic which we installed earlier.Type the following command in the terminal opened in the path to your design/runs/latest run folder/final/def/
  
- ```
- $   magic -T /home/parallels/Desktop/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../../tmp/merged.max.lef def read iiitb_rv32i.def &
- ```
+  ```
+  $   magic -T /home/parallels/Desktop/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../../tmp/merged.max.lef def read iiitb_rv32i.def &
+  ```
 
-*The final layout obtained after the completion of the flow in non-interactive mode is shown below:
+- The final layout obtained after the completion of the flow in non-interactive mode is shown below:
 
    <img width="622" alt="Screenshot 2022-08-25 at 8 36 51 AM" src="https://user-images.githubusercontent.com/110079631/186565327-8da1d083-e54e-4a39-ad09-21ea755d8f3b.png">
 
@@ -349,7 +349,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
         add_lefs -src $lefs
         ```
-   - ***3 . SYNTHESIS:***
+  - ***3 . SYNTHESIS:***
       * The command to run the synthesis is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
       * The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
         
@@ -367,7 +367,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         
         ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
         
-   - ***4 . FLOORPLAN***
+  - ***4 . FLOORPLAN***
       
       * Importance of files in increasing priority order:
 
@@ -397,7 +397,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
       * 
-   - ***5 . PLACEMENT***
+  - ***5 . PLACEMENT***
          
       * The next step in the OpenLANE ASIC flow is placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
         1. Global Placement: It finds optimal position for all cells which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length.
@@ -410,7 +410,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
-   - ***6 . CLOCK TREE SYNTHESIS***
+  - ***6 . CLOCK TREE SYNTHESIS***
          
       * The purpose of building a clock tree is enable the clock input to reach every element and to ensure a zero clock skew. H-tree is a common methodology followed in CTS.
         Before attempting a CTS run in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the ```write_verilog``` command. Then, the synthesis, floorplan and placement is run again. To run CTS use the below command:
@@ -418,7 +418,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         run_cts
         ```
       * 
-   - ***7 . ROUTING***
+  - ***7 . ROUTING***
           
       * OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:
         1. Global routing: Routing region is divided into rectangle grids which are represented as course 3D routes (Fastroute tool).
