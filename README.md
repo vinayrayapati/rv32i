@@ -342,6 +342,8 @@ Here we are going to customise our layout by including our custom made **sky130_
         sudo make mount
         ./flow.tcl -interactive
         ```
+        ![inti_term](https://user-images.githubusercontent.com/110079631/187484809-0a2ed950-3c75-41cb-91e2-c7a7016a19c0.png)
+
       - **2. Preparing the design and including the lef files:**
         The commands to prepare the design and overwite in a existing run folder the reports and results along with the command to include the lef files is given below:
         ```
@@ -349,11 +351,15 @@ Here we are going to customise our layout by including our custom made **sky130_
         set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
         add_lefs -src $lefs
         ```
+        ![prep_term](https://user-images.githubusercontent.com/110079631/187484861-5521fcbd-0e3a-49ca-8b72-a85b6d89c2cf.png)
+
   - ***3 . SYNTHESIS:***
       * The command to run the synthesis is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
+         ![syn_term](https://user-images.githubusercontent.com/110079631/187484962-90619f3a-0996-4b05-9813-1647f91505a0.png)
+
       * The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
         
-        ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
+         ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
       * Calcuation of Flop Ratio:
   
         ```
@@ -365,7 +371,7 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
       * The slack report including the **sky130_vsdinv** cell is shown below:
         
-        ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
+         ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
         
   - ***4 . FLOORPLAN***
       
@@ -387,7 +393,8 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```Note: Usually, vertical metal layer and horizontal metal layer values will be 1 more than that specified in the file```
         
       * To run the Floorplan use the command `run_floorplan`.
-        
+         ![fp_term](https://user-images.githubusercontent.com/110079631/187485235-86a1f9ac-8b09-4e53-9bb2-c118bf10c0c2.png)
+
       * Post the floorplan run, a `.def` file will have been created within the `results/floorplan` directory. 
         We may review floorplan files by checking the `floorplan.tcl`. 
         The system defaults will have been overriden by switches set in `conifg.tcl` and further overriden by switches set in `sky130A_sky130_fd_sc_hd_config.tcl`.
@@ -404,7 +411,8 @@ Here we are going to customise our layout by including our custom made **sky130_
         2. Detailed Placement: It alters the position of cells post global placement so as to legalise them.
          
       * To run the Placement use the command `run_Placement`.
-         
+         ![pl_term](https://user-images.githubusercontent.com/110079631/187485284-16c20125-e666-432a-8d3e-e09b92c3446c.png)
+
       * Post placement, the design can be viewed on magic within ```results/placement``` directory.
         Run the follwing command in that directory:
         ```
