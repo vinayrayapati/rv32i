@@ -289,7 +289,7 @@ Here we are generating the layout in the non-interactive mode or the automatic m
 
 Here we are going to customise our layout by including our custom made **sky130_vsdinv cell** into our layout.
 
-- ***CREATING THE SKY130_VSDINV CELL LEF FILE***
+- ***1 . CREATING THE SKY130_VSDINV CELL LEF FILE***
    - You need to first get the git repository of the **vsdstdccelldesign**.To get the repository type the following command:
 
      ``` git clone https://github.com/nickson-jose/vsdstdcelldesign.git ```
@@ -314,7 +314,7 @@ Here we are going to customise our layout by including our custom made **sky130_
    
       ![lef_write](https://user-images.githubusercontent.com/110079631/187439794-340e3c4d-65fc-48ad-8c2b-12ee5054e69f.PNG)
                
-- ***INCLUDING THE SKY130_VSDINV CELL***
+- ***2 . INCLUDING THE SKY130_VSDINV CELL***
 
    - You need to copy the **lib** files and the created **sky130_vsinv.lef** file to your design src directory.The src directory image with its contents is shown below:
      
@@ -353,14 +353,14 @@ Here we are going to customise our layout by including our custom made **sky130_
         ```
         ![prep_term](https://user-images.githubusercontent.com/110079631/187484861-5521fcbd-0e3a-49ca-8b72-a85b6d89c2cf.png)
 
-  - ***3 . SYNTHESIS:***
-      * The command to run the synthesis is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
+  - ***4 . SYNTHESIS:***
+      * **1. The command to run the synthesis** is ```run_synthesis```.This runs the synthesis where yosys translates RTL into circuit using generic components and abc maps the circuit to Standard Cells.
          ![syn_term](https://user-images.githubusercontent.com/110079631/187484962-90619f3a-0996-4b05-9813-1647f91505a0.png)
 
-      * The synthesized netlist is present in the results folder and the stats are present in the reports folder as shown below:
+      * **2. The synthesized netlist** is present in the results folder and the stats are present in the reports folder as shown below:
         
          ![stat_syn](https://user-images.githubusercontent.com/110079631/187448071-82e73b3c-2e9e-4f10-b636-a13bdb566986.png)
-      * Calcuation of Flop Ratio:
+      * **3. Calcuation of Flop Ratio:**
   
         ```
   
@@ -369,19 +369,19 @@ Here we are going to customise our layout by including our custom made **sky130_
                      Total Number of cells
   
         ```
-      * The slack report including the **sky130_vsdinv** cell is shown below:
+      * **4. The slack report** including the **sky130_vsdinv** cell is shown below:
         
          ![slack_vsd_syn](https://user-images.githubusercontent.com/110079631/187448346-260fb8ff-eef9-47b4-9096-facc01f395e3.png)
         
-  - ***4 . FLOORPLAN***
+  - ***5 . FLOORPLAN***
       
-      * Importance of files in increasing priority order:
+      * **1. Importance of files in increasing priority order:**
 
         1. ```floorplan.tcl``` - System default envrionment variables
         2. ```conifg.tcl```
         3. ```sky130A_sky130_fd_sc_hd_config.tcl```
         
-      * Floorplan envrionment variables or switches:
+      * **2. Floorplan envrionment variables or switches:**
 
         1. ```FP_CORE_UTIL``` - floorplan core utilisation
         2. ```FP_ASPECT_RATIO``` - floorplan aspect ratio
@@ -392,63 +392,65 @@ Here we are going to customise our layout by including our custom made **sky130_
            
         ```Note: Usually, vertical metal layer and horizontal metal layer values will be 1 more than that specified in the file```
         
-      * To run the Floorplan use the command `run_floorplan`.
+      * **3. To run the Floorplan use the command:** `run_floorplan`.
          ![fp_term](https://user-images.githubusercontent.com/110079631/187485235-86a1f9ac-8b09-4e53-9bb2-c118bf10c0c2.png)
 
-      * Post the floorplan run, a `.def` file will have been created within the `results/floorplan` directory. 
+      * **4. Post the floorplan** run, a `.def` file will have been created within the `results/floorplan` directory. 
         We may review floorplan files by checking the `floorplan.tcl`. 
         The system defaults will have been overriden by switches set in `conifg.tcl` and further overriden by switches set in `sky130A_sky130_fd_sc_hd_config.tcl`.
         
-      * To view the floorplan, Magic is invoked after moving to the ```results/floorplan``` directory,then use the floowing command:
+      * **5. To view the floorplan:** Magic is invoked after moving to the ```results/floorplan``` directory,then use the floowing command:
         ```
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
       * 
-  - ***5 . PLACEMENT***
+  - ***6 . PLACEMENT***
          
-      * The next step in the OpenLANE ASIC flow is placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
+      * **1. The next step in the OpenLANE ASIC flow is** placement. The synthesized netlist is to be placed on the floorplan. Placement is perfomed in 2 stages:
         1. Global Placement: It finds optimal position for all cells which may not be legal and cells may overlap. Optimization is done through reduction of half parameter wire length.
         2. Detailed Placement: It alters the position of cells post global placement so as to legalise them.
          
-      * To run the Placement use the command `run_Placement`.
+      * **2. To run the Placement use the command:** `run_Placement`.
          ![pl_term](https://user-images.githubusercontent.com/110079631/187485284-16c20125-e666-432a-8d3e-e09b92c3446c.png)
 
-      * Post placement, the design can be viewed on magic within ```results/placement``` directory.
+      * **3. Post placement:** the design can be viewed on magic within ```results/placement``` directory.
         Run the follwing command in that directory:
         ```
         magic -T /home/vinay/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read iiitb_rv32i.def &
         ```
-  - ***6 . CLOCK TREE SYNTHESIS***
+  - ***7 . CLOCK TREE SYNTHESIS***
          
-      * The purpose of building a clock tree is enable the clock input to reach every element and to ensure a zero clock skew. H-tree is a common methodology followed in CTS.
-        Before attempting a CTS run in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the ```write_verilog``` command. Then, the synthesis, floorplan and placement is run again. To run CTS use the below command:
-        ```
-        run_cts
-        ```
+      * **1. The purpose** of building a clock tree is enable the clock input to reach every element and to ensure a zero clock skew. H-tree is a common methodology followed in CTS.
+        Before attempting a CTS run in TritonCTS tool, if the slack was attempted to be reduced in previous run, the netlist may have gotten modified by cell replacement techniques. Therefore, the verilog file needs to be modified using the ```write_verilog``` command. Then, the synthesis, floorplan and placement is run again. 
+      * **2. To run CTS use the below command:**
+         ```
+         run_cts
+         ```
       * 
-  - ***7 . ROUTING***
+  - ***8 . ROUTING***
           
-      * OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:
+      * **1. OpenLANE uses the TritonRoute tool for routing. There are 2 stages of routing:**
         1. Global routing: Routing region is divided into rectangle grids which are represented as course 3D routes (Fastroute tool).
         2. Detailed routing: Finer grids and routing guides used to implement physical wiring (TritonRoute tool). 
-      * Features of TritonRoute:
+      * **2. Features of TritonRoute:**
         1. Honouring pre-processed route guides
         2. Assumes that each net satisfies inter guide connectivity
         3. Uses MILP based panel routing scheme
         4. Intra-layer parallel and inter-layer sequential routing framework
-      * Running routing step in TritonRoute as part of openLANE flow:
+      * **3. Running routing step in TritonRoute as part of openLANE flow:**
         ```
         run_routing
         ```
-      * `run_routing` - To start the routing
-         1. The options for routing can be set in the `config.tcl` file. 
-         2. The optimisations in routing can also be done by specifying the routing strategy to use different version of `TritonRoute Engine`. There is a trade0ff between the optimised route and the runtime for routing.
-         3. The routing stage must have the `CURRENT_DEF` set to `pdn.def`.
-         4. The two stages of routing are performed by the following engines:
+      * **4. ***Do know*  in routing stage**
+         1. `run_routing` - To start the routing
+         2. The options for routing can be set in the `config.tcl` file. 
+         3. The optimisations in routing can also be done by specifying the routing strategy to use different version of `TritonRoute Engine`. There is a trade0ff between the optimised route and the runtime for routing.
+         4. The routing stage must have the `CURRENT_DEF` set to `pdn.def`.
+         5. The two stages of routing are performed by the following engines:
               - Global Route   : Fast Route
               - Detailed Route : Triton Route
-         5. Fast Route generates the routing guides, whereas Triton Route uses the Global Route and then completes the routing with some strategies and optimisations for finding the best possible path connect the pins.
-      * 
+         6. Fast Route generates the routing guides, whereas Triton Route uses the Global Route and then completes the routing with some strategies and optimisations for finding the best possible path connect the pins.
+       * 
                
 
 ### Author
